@@ -33,6 +33,15 @@ public class ControllerTask {
         return "";
     }
 
+    @DeleteMapping("/api/delete/{id}")
+    public @ResponseBody String DeleteOne(@PathVariable long id){
+        System.out.println("KICKB SERVER : Delete a task");
+        ConfigHTTP.attenteArticifielle();
+        MUser user = currentUser();
+        serviceTask.DeleteOne(id,user);
+        return "";
+    }
+
     @GetMapping(value = "/api/progress/{taskID}/{value}", produces = "text/plain")
     public @ResponseBody String updateProgress(@PathVariable long taskID, @PathVariable int value) {
         System.out.println("KICKB SERVER : Progress for task : " + taskID + " @" + value);

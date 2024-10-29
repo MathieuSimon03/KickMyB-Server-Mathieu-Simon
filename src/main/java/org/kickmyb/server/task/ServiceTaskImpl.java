@@ -31,6 +31,15 @@ public class ServiceTaskImpl implements ServiceTask {
     }
 
     @Override
+    public void DeleteOne(Long taskId, MUser user) {
+        MTask element = user.tasks.stream().filter(elt -> elt.id == taskId).findFirst().get();
+        if(element != null){
+            user.tasks.remove(element);
+            repo.delete(element);
+        }
+    }
+
+    @Override
     public TaskDetailResponse detail(Long id, MUser user) {
         //MTask element = user.tasks.stream().filter(elt -> elt.id == id).findFirst().get();
         MTask element = repo.findById(id).get();
